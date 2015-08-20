@@ -15,7 +15,7 @@ int main ( int argc , char *argv[] )
     FILE *fp;
     char line[64] , *p , *c;
      
-    fp = popen("/proc/net/route" , "r");
+    fp = fopen("/proc/net/route" , "r");
      
     while(fgets(line , 64 , fp))
     {
@@ -27,7 +27,7 @@ int main ( int argc , char *argv[] )
             if(strcmp(c , "00000000") == 0)
             {
                 printf("Default interface is : %s \n" , p);
-                break;
+                pclose(fp);
             }
         }
     }
